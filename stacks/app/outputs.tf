@@ -2,9 +2,11 @@
 # VM og Web App flyttes til service-stackene.
 
 output "vm_public_ips" {
-  value = tomap({})
+  description = "Output for vm_public_ips"
+  value       = tomap({})
 }
 
 output "webapp_hostnames" {
-  value = tomap({})
+  description = "Output for webapp_hostnames"
+  value       = tomap({})
 }
