@@ -1,3 +1,4 @@
+# tflint-ignore: terraform_unused_declarations
 variable "kortnavn" {
   description = "Kortnavnet ditt. Settes i config/felles.tfvars."
   type        = string
@@ -8,11 +9,13 @@ variable "kortnavn" {
   }
 }
 
+# tflint-ignore: terraform_unused_declarations
 variable "location" {
   description = "Azure-regionen. Settes i config/felles.tfvars."
   type        = string
 }
 
+# tflint-ignore: terraform_unused_declarations
 variable "miljo" {
   description = "Miljøet. Settes av scripts/kjor.sh (TF_VAR_miljo), ikke i en .tfvars-fil."
   type        = string
@@ -23,21 +26,25 @@ variable "miljo" {
   }
 }
 
+# tflint-ignore: terraform_unused_declarations
 variable "state_resource_group_name" {
   description = "Ressursgruppa til state-kontoen. Settes av scripts/kjor.sh fra shared/backend.hcl."
   type        = string
 }
 
+# tflint-ignore: terraform_unused_declarations
 variable "state_storage_account_name" {
   description = "State-kontoen. Settes av scripts/kjor.sh fra shared/backend.hcl."
   type        = string
 }
 
+# tflint-ignore: terraform_unused_declarations
 variable "state_container_name" {
   description = "Containeren state ligger i. Settes av scripts/kjor.sh fra shared/backend.hcl."
   type        = string
 }
 
+# tflint-ignore: terraform_unused_declarations
 variable "tjenester" {
   description = "Tjenestene som skal ha en storage account og et Key Vault."
   type        = set(string)
