@@ -123,8 +123,13 @@ for navn in $filer; do
   if [ "$HANDLING" = apply ]; then
     # Vent på låsen i stedet for å feile hvis en annen kjøring holder den.
     if terraform plan -input=false -lock-timeout=5m "${VARFILER[@]}" -out=tfplan -no-color > plan.txt 2>&1; then
-      terraform apply -input=false -lock-timeout=5m -no-color tfplan >> plan.txt 2>&1
-      kode=$?
+      # Sikkerhetssjekk: avbryt hvis planen sletter eller erstatter ressurser.
+      if ! terraform show -json tfplan | python -c 'import json,sys; p=json.load(sys.stdin); bad=[r for r in p.get("resource_changes",[]) if "delete" in r.get("change",{}).get("actions",[])]; print("BLOKKERT: sletting/erstatning:", [r["address"] for r in bad]) if bad else print("OK: ingen sletting eller erstatning"); sys.exit(1 if bad else 0)' >> plan.txt 2>&1; then
+        kode=1
+      else
+        terraform apply -input=false -lock-timeout=5m -no-color tfplan >> plan.txt 2>&1
+        kode=$?
+      fi
     else
       kode=1
     fi

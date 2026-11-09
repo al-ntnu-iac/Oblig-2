@@ -1,9 +1,10 @@
+# Midlertidige outputs under migreringen.
+# VM og Web App flyttes til service-stackene.
+
 output "vm_public_ips" {
-  description = "Offentlig IP per VM-tjeneste. Åpne http://<ip> for å se boot-id-en."
-  value       = { for navn, v in module.vm : navn => v.public_ip }
+  value = tomap({})
 }
 
 output "webapp_hostnames" {
-  description = "Adresse per web app-tjeneste."
-  value       = { for navn, w in module.webapp : navn => w.hostname }
+  value = tomap({})
 }
