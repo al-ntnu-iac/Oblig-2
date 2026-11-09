@@ -23,6 +23,7 @@ variable "miljo" {
   }
 }
 
+# tflint-ignore: terraform_unused_declarations
 variable "address_space" {
   description = "Adresserommet til VNet-et."
   type        = list(string)
@@ -36,6 +37,7 @@ variable "tjenester" {
   }))
 }
 
+# tflint-ignore: terraform_unused_declarations
 variable "allow_http_from" {
   description = "Hvem som får nå tjenestene på port 80."
   type        = string
